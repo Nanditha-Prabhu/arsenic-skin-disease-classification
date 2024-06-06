@@ -8,10 +8,28 @@ app = Flask(__name__)
 CORS(app)
 
 # Load the pre-trained model
-model = load_model('C:/Users/Lenovo/ai-based_tool_for_preliminary_diagnosis_of_dermatological_manifestations/backend/my_model20.h5')
+model = load_model('C:/Users/NANDITHAPRABU/Documents/6thSemMiniProject/models/effnet4446Adam2.h5')
+
+def apply_clahe(img):
+    # divide into R, G, B channels
+    b, g, r = cv2.split(img)
+
+    # Create a CLAHE object
+    clahe = cv2.createCLAHE(clipLimit=4.0, tileGridSize=(8,8))
+
+    # Apply CLAHE to each channel
+    r_clahe = clahe.apply(r)
+    g_clahe = clahe.apply(g)
+    b_clahe = clahe.apply(b)
+
+    # Merge R,G,B channels
+    output_img = cv2.merge([b_clahe, g_clahe, r_clahe])
+
+    return output_img
 
 # Define a function to preprocess the image
 def preprocess_image(image):
+    image = apply_clahe(image)
     image = cv2.resize(image, (224, 224))
     image = image.astype("float") / 255.0
     image = np.expand_dims(image, axis=0)
@@ -34,40 +52,25 @@ def predict():
 
             # Perform inference
             preds = model.predict(processed_image)
-            predicted_class = np.argmax(preds)
+            predicted_class = (preds[0] > 0.5).astype(int)
+            print('preds ', preds[0])
+            # predicted_class = np.argmax(preds)
+            print('predicted_class ', predicted_class)
 
             # Map the predicted class to its label
             label_mapping = {
-                0: "Acne and Rosacea Photos",
-                1: "Actinic Keratosis Basal Cell Carcinoma and other Malignant Lesions",
-                2: "Malignant Lesions",
-                3: "Atopic Dermatitis Photos",
-                4: "Bullous Disease Photos",
-                5: "Cellulitis Impetigo and other Bacterial Infections",
-                6: "Eczema Photos",
-                7: "Exanthems and Drug Eruptions",
-                8: "Hair Loss Photos Alopecia and other Hair Diseases",
-                9: "Herpes HPV and other STDs Photos",
-                10: "Light Diseases and Disorders of Pigmentation",
-                11: "Lupus and other Connective Tissue diseases",
-                12: "Melanoma Skin Cancer Nevi and Moles",
-                13: "Nail Fungus and other Nail Disease",
-                14: "Poison Ivy Photos and other Contact Dermatitis",
-                15: "Psoriasis pictures Lichen Planus and related diseases",
-                16: "Scabies Lyme Disease and other Infestations and Bites",
-                17: "Seborrheic Keratoses and other Benign Tumors",
-                18: "Systemic Disease",
-                19: "Tinea Ringworm Candidiasis and other Fungal Infections",
-                20: "Urticaria Hives",
-                21: "Vascular Tumors",
-                22: "Vasculitis Photos",
-                23: "Warts Molluscum and other Viral Infections",
+                1: "Healthy",
+                0: "Arsenic infected"
             }
-            predicted_label = label_mapping.get(int(predicted_class), "Unknown")
+            if predicted_class[0] == 1:
+                predicted_label = 'Arsenic infected'
+            else:
+                predicted_label = 'Healthy'
 
             # Update the response data
-            data["predictions"] = [{"class_id": int(predicted_class), "class_label": predicted_label}]
+            data["predictions"] = [{"class_id": int(predicted_class[0]), "class_label": predicted_label}]
             data["success"] = True
+            print(data)
 
     # Return the JSON response
     return jsonify(data)

@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import { Menu, X } from "lucide-react";
+import axios from "axios";
 
 const menuItems = [
   {
@@ -18,6 +19,38 @@ const menuItems = [
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [image, setImage] = useState(null);
+  const [predictedClass, setPredictedClass] = useState(null);
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const handleUpload = async (event) =>  {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("image", image);
+
+    try {
+      const r = await axios.post("http://localhost:8080/predict", formData);
+      console.log(r.data);
+      const data = r.data['predictions'][0]['class_label']
+      setPredictedClass(data)
+      console.log(data)
+    }catch (error){
+      console.error("Error uploading image: ", error);
+    }
+
+    // axios
+    //   .post("http://localhost:8080/predict", formData)
+    //   .then((response) => {
+    //     setPredictedClass(response.data.success);
+    //     console.log(predictedClass)
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error uploading image: ", error);
+    //   });
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -132,13 +165,13 @@ export default function Home() {
       </header>
 
       {/* main content */}
-      <form className="flex flex-col items-center justify-center space-x-6">
+      <form onSubmit={handleUpload} className="flex flex-col items-center justify-center text-center space-x-6">
         <h2 className="text-3xl font-bold mt-10">
           Upload a photo of diseased skin
         </h2>
         <div className=" p-8 m-8 border-2">
           <label className="block">
-            <span className="sr-only">Choose profile photo</span>
+            <span className="sr-only">Choose photo</span>
             <input
               type="file"
               className="block w-full text-sm text-slate-500
@@ -148,6 +181,7 @@ export default function Home() {
       file:bg-violet-50 file:text-violet-700
       hover:file:bg-violet-100
     "
+    onChange={handleImageChange}
             />
           </label>
           <button
@@ -160,8 +194,9 @@ export default function Home() {
       </form>
 
       {/* Results */}
-      <div className="flex items-center justify-center">
+      <div className="flex flex-col items-center justify-center">
         <h2 className="text-3xl font-bold m-10">Results</h2>
+        {predictedClass && <p className={` font-semibold ${predictedClass == "Healthy" ? "text-green-500" : "text-red-500"}`}>Your skin is {predictedClass}.</p>}
       </div>
 
       <hr className="my-8" />
