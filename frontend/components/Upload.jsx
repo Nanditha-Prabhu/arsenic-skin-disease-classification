@@ -39,6 +39,21 @@ export default function Upload() {
   return (
     <>
       {/* main content */}
+      <div className="mx-auto max-w-2xl  text-center">
+          <h2 className="mt-8 text-3xl font-bold leading-tight text-black sm:text-4xl lg:mt-12 lg:text-5xl">
+            Take a{" "}
+            <span className="border-b-8 border-yellow-300">Test</span>
+          </h2>
+        </div>
+        <div className="mx-auto max-w-3xl my-16">
+            <h3 className="text-2xl font-bold my-4 text-center"><span className="border-b-8 border-yellow-300">Instructions</span></h3>
+            <ul className=" p-6 h-auto rounded-lg bg-yellow-100  text-left">
+                <li>The model is trained on images of arsenic toxicity instances located on sites prone to friction like palms and soles.</li>
+                <li>Thus, it is advised to upload images of palm and soles for the best results.</li>
+                <li>The model is not 100% accurate nor it considers medical history of the user.</li>
+                <li>This is just for the preliminary diagnosis for immediate action.</li>
+            </ul>
+        </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8 m-6">
         <div className="h-auto rounded-lg bg-gray-200">
           <form
@@ -46,7 +61,7 @@ export default function Upload() {
             className="flex flex-col items-center justify-center text-center space-x-6"
           >
             <h2 className="text-3xl font-bold mt-10">
-              Upload a photo
+            <span className="border-b-8 border-yellow-300">Upload</span> a photo
             </h2>
             <div className=" p-8 m-8 border-2 border-slate-800 rounded-lg">
               <label className="block">
@@ -72,13 +87,13 @@ export default function Upload() {
             </div>
           </form>
         </div>
-        <div className=" h-auto rounded-lg bg-gray-200">
+        <div className=" h-auto rounded-lg bg-yellow-100">
           {/* Results */}
           {isLoading ? (
           <Loading />
         ) : (
           <div className="flex flex-col items-center justify-center">
-            <h2 className="text-3xl font-bold m-10">Results</h2>
+            <h2 className="text-3xl font-bold m-10"><span className="border-b-8 border-yellow-300">Results</span></h2>
             {predictedClass && (
               <p
                 className={` font-semibold text-xl shadow-2xl mb-10 ${
@@ -87,7 +102,7 @@ export default function Upload() {
                     : "text-red-500"
                 }`}
               >
-                Your skin is {predictedClass}.
+                The skin is {predictedClass}.
               </p>
             )}
           </div>
