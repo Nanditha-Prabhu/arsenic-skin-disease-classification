@@ -75,6 +75,18 @@ def predict():
     # Return the JSON response
     return jsonify(data)
 
+@app.route("/cluster", methods=["POST"])
+def cluster():
+    data = {"success": False}
+
+    if request.method == "POST":
+        # Check if an image was uploaded
+        if request.files.get("image"):
+            # Read the image
+            image = request.files["image"].read()
+            image = np.frombuffer(image, dtype=np.uint8)
+            image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
 

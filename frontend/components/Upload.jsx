@@ -47,7 +47,7 @@ export default function Upload() {
         </div>
         <div className="mx-auto max-w-3xl my-16">
             <h3 className="text-2xl font-bold my-4 text-center"><span className="border-b-8 border-yellow-300">Instructions</span></h3>
-            <ul className=" p-6 h-auto rounded-lg bg-yellow-100  text-left">
+            <ul className=" p-6 h-auto rounded-lg bg-yellow-100  text-left mx-6">
                 <li>The model is trained on images of arsenic toxicity instances located on sites prone to friction like palms and soles.</li>
                 <li>Thus, it is advised to upload images of palm and soles for the best results.</li>
                 <li>The model is not 100% accurate nor it considers medical history of the user.</li>
@@ -58,18 +58,18 @@ export default function Upload() {
         <div className="h-auto rounded-lg bg-gray-200">
           <form
             onSubmit={handleUpload}
-            className="flex flex-col items-center justify-center text-center space-x-6"
+            className="flex flex-col mx-auto items-center justify-center text-center space-x-6"
           >
             <h2 className="text-3xl font-bold mt-10">
             <span className="border-b-8 border-yellow-300">Upload</span> a photo
             </h2>
-            <div className=" p-8 m-8 border-2 border-slate-800 rounded-lg">
+            <div className=" p-4 md:p-8 my-8 mx-auto border-2 border-slate-800 rounded-lg">
               <label className="block">
                 <span className="sr-only">Choose or drag and drop a skin photo</span>
                 <input
                   type="file"
                   className="block w-full text-sm text-slate-500
-                    file:mr-4 file:py-2 file:px-4
+                    file:py-2 file:px-4
                     file:rounded-full file:border-0
                     file:text-sm file:font-semibold
                     file:bg-slate-50 file:text-slate-700
