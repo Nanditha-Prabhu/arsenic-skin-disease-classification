@@ -23,12 +23,14 @@ export default function Home() {
           </button>
         </div>
 
-        <div className="mx-auto max-w-3xl my-24  text-center">
+        <div className="mx-auto max-w-3xl my-24 text-center">
           <h3 className="text-2xl font-bold my-4">
             Arsenic and its{" "}
             <span className="border-b-8 border-yellow-300">Occurance</span>
           </h3>
-          <p className=" p-6 h-auto rounded-lg bg-yellow-100">
+          <div className=" flex flex-col md:flex-row gap-3 p-6 h-auto rounded-lg bg-yellow-100">
+          <img className=" w-28 rounded-lg border border-black" src="./arsenic.jpg" alt="arsenic metal" />
+          <p className=" text-left">
             Arsenic is a naturally occurring, semi-metallic element widely
             distributed in the Earth's crust whose levels in the environment can
             vary by locality. Contaminated drinking water is the most common
@@ -41,6 +43,7 @@ export default function Home() {
             arsenic-rich sediments deposited in the Brahmaputra Gangetic River
             basin that was formed millions of years ago.
           </p>
+          </div>
         </div>
 
         <div className="mx-auto max-w-3xl my-24  text-center">
@@ -48,7 +51,9 @@ export default function Home() {
             Arsenic and its{" "}
             <span className="border-b-8 border-yellow-300">Health Hazards</span>
           </h3>
-          <p className=" p-6 h-auto rounded-lg bg-yellow-100">
+          <div className=" flex flex-col md:flex-row gap-3 p-6 h-auto rounded-lg bg-yellow-100">
+          <img className=" w-28 rounded-lg border border-black" src="./keratosis.jpg" alt="arsenic metal" />
+          <p className=" text-left">
             Arsenic can affect a broad range of organs and systems including the
             cardiovascular system, endocrine system, immune system, liver,
             kidney, bladder, nervous system, prostate glands, respiratory
@@ -60,6 +65,7 @@ export default function Home() {
             keratosis), trunk, genitalia, and eyelids. Arsenic keratosis has
             been graded as mild, moderate, and severe types.
           </p>
+          </div>
         </div>
 
         <div class="space-y-4 mx-auto max-w-3xl my-24">

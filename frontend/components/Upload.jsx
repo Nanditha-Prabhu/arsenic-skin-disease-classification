@@ -76,7 +76,7 @@ export default function Upload() {
                     file:rounded-full file:border-0
                     file:text-sm file:font-semibold
                     file:bg-slate-50 file:text-slate-700
-                    hover:file:bg-violet-100
+                    hover:file:bg-slate-100
                     "
                   onChange={handleImageChange}
                 />
