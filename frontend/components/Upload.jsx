@@ -5,6 +5,7 @@ import axios from "axios";
 export default function Upload() {
   const [image, setImage] = useState(null);
   const [predictedClass, setPredictedClass] = useState(null);
+  const [predictedSeverity, setPredictedSeverity] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -27,9 +28,11 @@ export default function Upload() {
     try {
       const r = await axios.post("http://localhost:8080/predict", formData);
       console.log(r.data);
-      const data = r.data["predictions"][0]["class_label"];
-      setPredictedClass(data);
-      console.log(data);
+      const predict = r.data["predictions"][0]["class_label"];
+      setPredictedClass(predict);
+      const severity = r.data["predictions"][0]["severity"];
+      setPredictedSeverity(severity)
+      console.log('class ', predict, ' severity ', severity);
       setIsLoading(false)
     } catch (error) {
       console.error("Error uploading image: ", error);
@@ -96,13 +99,14 @@ export default function Upload() {
             <h2 className="text-3xl font-bold m-10"><span className="border-b-8 border-yellow-300">Results</span></h2>
             {predictedClass && (
               <p
-                className={` font-semibold text-xl shadow-2xl mb-10 ${
+                className={` text-center font-semibold text-xl mb-10 ${
                   predictedClass == "Healthy"
                     ? "text-green-500"
                     : "text-red-500"
                 }`}
               >
                 The skin is {predictedClass}.
+                {predictedClass=='Arsenic infected' ? (<p>Predicted severity is {predictedSeverity}.</p>) : (<p></p>) }
               </p>
             )}
           </div>
