@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar"
 import Home from "../components/Home"
 import Upload from '../components/Upload';
 import Footer from "../components/Footer"
+import FindDermatologists from '../components/FindDermatologists';
+import { SignIn } from '../components/SignIn';
 // import SignUp from "../components/SignUp"
 // import SignIn from "../components/SignIn"
 // import UploadData from '../components/UploadData';
@@ -30,16 +32,26 @@ const router = createBrowserRouter([
       </>
     ),
   },
-  // {
-  //   path: "/SignUp",
-  //   element: (
-  //     <>
-  //       <Navbar />
-  //       <SignUp />
-  //       <Footer />
-  //     </>
-  //   ),
-  // },
+  {
+    path: "/find-dermatologists",
+    element: (
+      <>
+        <Navbar />
+        <FindDermatologists />
+        <Footer />
+      </>
+    ),
+  },
+  {
+    path: "/signin",
+    element: (
+      <>
+        <Navbar />
+        <SignIn />
+        <Footer />
+      </>
+    ),
+  },
   // {
   //   path: "/Access_Data",
   //   element: (

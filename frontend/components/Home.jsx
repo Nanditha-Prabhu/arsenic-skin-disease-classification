@@ -129,6 +129,33 @@ export default function Home() {
               Our model has achieved 98% accuracy while training, validating and testing. But we surely expect you to seek advice from dermatologists before taking any action. This can just be considered as a preliminary test instead of other expensive tests.
             </p>
           </details>
+
+          <details class="group [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-yellow-100 p-4 text-gray-900">
+              <h2 class="font-medium">
+                Where can I find the doctors?
+              </h2>
+
+              <svg
+                class="size-5 shrink-0 transition duration-300 group-open:-rotate-180"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+
+            <p class="mt-4 px-4 leading-relaxed text-gray-700">
+              You can find the dermatologists by heading over to 'Find Dermatologists' section from the navbar or by clicking <a className=" text-blue-600" href="/find-dermatologists">here</a>. You can also search for the place of dermatologist and it will be highlighted from the list.
+            </p>
+          </details>
         </div>
       </div>
     </section>
