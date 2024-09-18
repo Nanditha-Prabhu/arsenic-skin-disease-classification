@@ -16,6 +16,10 @@
 ![horizclustering-module](https://github.com/user-attachments/assets/f1e0c9b3-7330-4eb9-973b-931293f3f599)
 ### Overall architecture
 ![product-architecture](https://github.com/user-attachments/assets/7e064118-d62e-484d-b2c0-cfac7d9f325e)
+## Demo Video
+https://github.com/user-attachments/assets/7cd7f3f4-8ee0-4dff-a78d-fe4a444d092f
+
+
 
 
 
